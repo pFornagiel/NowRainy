@@ -9,7 +9,7 @@ interface ForecastWindowProps {
 
 
 
-const style = "w-full h-full fill-white mt-[-20px]"
+const style = "w-full h-full fill-white mt-[-20px] mb-[-20px] p-0 m-0"
 
 // Maybe not the most elegant of solutions, but works fine
 const iconArray = [<Icon_0 className={style}></Icon_0>,
@@ -30,9 +30,9 @@ const ForecastWindow = ( {time, temperature, icon} : ForecastWindowProps) => {
 
     return ( 
         <div className={` p-2 h-full w-full ${transitionContextObject?.transition}-animation flex flex-col justify-center items-center text-white`}>
-                <h6>{Math.round(temperature) + "º"}</h6>
+                <h6 className=' text-lg'>{Math.round(temperature) + "º"}</h6>
                 {iconArray[icon]}
-                <h6>{formatedTime}</h6>
+                <h6 className=' text-lg'>{formatedTime}</h6>
         </div>
      );
 }

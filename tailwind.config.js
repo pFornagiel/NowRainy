@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+const defaultTheme = require('tailwindcss/defaultTheme')
+
 export default {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
@@ -6,6 +8,10 @@ export default {
   theme: {
     fontFamily:{
       'main': ['Inter', 'sans-serif']
+    },
+    screens:{
+      'xs': '450px',
+      ...defaultTheme.screens,
     },
     extend: {
       keyframes: {

@@ -1,3 +1,7 @@
+// Typescript implementation of josephg's noisejs by alanko0511
+// https://github.com/josephg/noisejs
+// https://github.com/alanko0511/noisejs-typescript
+
 class Grad {
     x: number;
     y: number;

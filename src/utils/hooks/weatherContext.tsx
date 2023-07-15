@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useContext, useState } from "react";
 import axios from "axios";
+import { getRandomSentence } from "./weatherLines";
 
 interface hourlyWeatherObject  {
     time: number[],
@@ -10,14 +11,17 @@ interface hourlyWeatherObject  {
 }
 
 interface currentWeatherObject  {
-    isDay: number,
+        isDay: number,
         temperature: number,
         time: number,
         weatherCode: number,
         weatherName: string,
         iconNumber: number,
         winddirection: number,
-        windspeed: number
+        windspeed: number,
+        maxTemperature: number,
+        minTemperature: number,
+        randomSentence: string
 }
 
 interface weatherInformationObject{
@@ -37,7 +41,7 @@ interface Props {
 // UTILITIES USED TO WORK WITH THE HOOK \\
 
 const fetchWeatherData = async (lat: number, log: number) => {
-    return await axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${log}&hourly=temperature_2m,weathercode&current_weather=true&timeformat=unixtime&forecast_days=2&timezone=auto`)
+    return await axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${log}&hourly=temperature_2m,weathercode&current_weather=true&timeformat=unixtime&forecast_days=2&timezone=auto&daily=temperature_2m_max,temperature_2m_min`)
   }
 
 // HOOK FUNCTIONS \\
@@ -59,10 +63,10 @@ const WeatherContextProvider = ({children} : Props) => {
                 weatherName = 'Clear Skies'
                 break;
             case "1":
-                weatherName = 'Partly Cloudy'
+                weatherName = 'Mainly Clear'
                 break;
             case "2":
-                weatherName = 'Cloudy'
+                weatherName = 'Partly Cloudy'
                 break;
             case "3":
                 weatherName = 'Overcast'
@@ -90,8 +94,8 @@ const WeatherContextProvider = ({children} : Props) => {
                 weatherCode = '10'
 
         }
-        const newHourlyCodesArray = weatherData.data.hourly.weathercode.map(code => String(code)[0])
-        const newWeatherObject = {currentWeather: {...weatherData.data.current_weather, iconNumber: Number(weatherCode), weatherName: weatherName}, hourlyWeather: {time: weatherData.data.hourly.time, weatherCode: weatherData.data.hourly.weathercode, temperature: weatherData.data.hourly.temperature_2m, iconNumber: newHourlyCodesArray}}
+        const newHourlyCodesArray = weatherData.data.hourly.weathercode.map((code:number) => String(code)[0])
+        const newWeatherObject = {currentWeather: {...weatherData.data.current_weather, iconNumber: Number(weatherCode), weatherName: weatherName, maxTemperature: weatherData.data.daily.temperature_2m_max[0], minTemperature: weatherData.data.daily.temperature_2m_min[0], randomSentence: getRandomSentence(Number(weatherCode))}, hourlyWeather: {time: weatherData.data.hourly.time, weatherCode: weatherData.data.hourly.weathercode, temperature: weatherData.data.hourly.temperature_2m, iconNumber: newHourlyCodesArray}}
         setWeatherContextObject(newWeatherObject)
     }
 

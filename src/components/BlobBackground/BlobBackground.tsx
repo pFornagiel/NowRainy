@@ -1,6 +1,7 @@
-import { useRef } from "react";
-import useBlobBackground from "./hooks/useBlobBackground";
+import { useEffect, useRef } from "react";
+import {useBlobBackground, udpateColours} from "./hooks/useBlobBackground";
 import { useFirstRenderContext } from "../../utils/hooks/firstRenderContext";
+import { useWeatherContext } from "../../utils/hooks/weatherContext";
 
 // INTERFACES AND TYPES DECLARATION
 
@@ -10,13 +11,20 @@ interface BlobBackgroundProps {
 
 const BlobBakcground = (props: BlobBackgroundProps): JSX.Element => {
   const firsRenderObject = useFirstRenderContext();
+  const weatherContextObject = useWeatherContext();
 
   // Set up the background
   const canvasRef = useRef<HTMLCanvasElement>(null);
   useBlobBackground(canvasRef);
 
+  useEffect(() => {
+    if(!weatherContextObject?.weatherObject) return
+    udpateColours(weatherContextObject?.weatherObject?.currentWeather.iconNumber, 10)
+    // udpateColours(1, 5)
+    console.log(weatherContextObject?.weatherObject)
+  }, [weatherContextObject?.weatherObject])
 
-  const styleToBeReviewed = "lg:max-w-7xl"
+  // const styleToBeReviewed = "lg:max-w-7xl"
 
   return (
       <div className=" relative flex items-center w-screen h-screen justify-center font-main">

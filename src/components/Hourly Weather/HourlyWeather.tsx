@@ -34,9 +34,8 @@ const HourlyWeather = () => {
 
     return ( 
         // ${transitionContextObject?.transition}-animation`}
-        <div className={` w-full h-32 bg-slate-800 rounded-xl backdrop-blur-lg bg-opacity-20 transition-all  duration-500 ${firsRenderContextObject?.firstRender ? "opacity-0" : "opacity-100"} flex justify-center items-center`}>
+        <div className={` my-3 w-full h-32 bg-slate-800 rounded-xl backdrop-blur-lg bg-opacity-20 transition-all  duration-500 ${firsRenderContextObject?.firstRender ? "opacity-0" : "opacity-100"} flex justify-center items-center`}>
             {indexes.map(index => {
-                console.log(index, hourlyWeather)
                 if(!index || !hourlyWeather?.weatherCode) return
                 return(
                     <ForecastWindow key={index} icon={hourlyWeather?.iconNumber[index]} temperature={hourlyWeather?.temperature[index]} time={(new Date(hourlyWeather?.time[index] * 1000)).getHours()}/>

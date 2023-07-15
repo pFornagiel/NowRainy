@@ -6,5 +6,5 @@
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true
   },
-  "include": ["vite.config.ts", "src/**/*.ts", "tests/**/*.ts", "src/utils/hooks/weatherContext.tsx", "src/components/BlobBackground/hooks/useBlobBackground.tsx"]
+  "include": ["vite.config.ts", "src/**/*.ts", "tests/**/*.ts"]
 }

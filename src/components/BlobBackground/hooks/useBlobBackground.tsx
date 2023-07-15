@@ -1,6 +1,7 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import Perlin from '../utils/perlin3d';
 import * as THREE from "three";
+import * as TWEEN from '@tweenjs/tween.js'
 
 // INTERFACES AND TYPES DECLARATION
 
@@ -104,38 +105,29 @@ const baseFragmentShader = `
 // Create a new blob object and an object array
 // State quite possibly not needed WRONG!@#!@!
 
+const objectArray: objectTemplate[] = []
 
 const useBlobBackground = (canvasRef: React.RefObject<HTMLCanvasElement>) => {
   
   // SETTING THINGS UP AND DISPLAYING
 
+  
   useEffect(() => {
-    const objectArray: objectTemplate[] = []
+
     // Setting up camera and scene
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x7ab2ff)
+    scene.background = new THREE.Color('hsl(215, 100%, 74%)');
     const camera = new THREE.PerspectiveCamera(10, window.innerWidth / window.innerHeight, 1, 10000);
     camera.position.z = 20;
     scene.add(camera)
 
-    // TESTING BLOBS HERE, IGNORE
-
-    // createNewBlob(1, 200, 100, camera, "Deepskyblue", "Ivory", objectArray)
-    // createNewBlob(0.8, 1400, 400, camera, "Red", "Ivory", objectArray)
-    // createNewBlob(0.7, 700, 800, camera, "white", "Yellowgreen", objectArray)
-
-    // createNewBlob(0.7, 200, 100, camera, "Deepskyblue", "Ivory", objectArray)
-    // createNewBlob(0.8, 1400, 400, camera, "Red", "Ivory", objectArray)
-    // createNewBlob(0.75, 700, 800, camera, "white", "Yellowgreen", objectArray)
-    // createNewBlob(0.6, 1200, 800, camera, "Deepskyblue", "Ivory", objectArray)
-    // createNewBlob(0.5, 1000, 100, camera, "Red", "Ivory", objectArray)
-    // createNewBlob(0.92, 5500, 400, camera, "white", "Yellowgreen", objectArray)
 
     createNewBlob(1.5, 200, 200, camera, "Deepskyblue", "Ivory", objectArray, baseVertexShader, baseFragmentShader)
     createNewBlob(2, 1400, 400, camera, 0x45c7ff, 0xd2e3fc, objectArray, baseVertexShader, baseFragmentShader)
-    createNewBlob(1.6, 700, 800, camera, "white", 0x3280ed, objectArray, baseVertexShader, baseFragmentShader)
+    createNewBlob(1.6, 700, 800, camera, 0x5527ff, 'white', objectArray, baseVertexShader, baseFragmentShader)
 
-
+    // console.log(objectArray[0].object.material.uniforms.color1.value = new THREE.Color('red'))
+    
     // Set up renderer
     const renderer = new THREE.WebGL1Renderer({
         canvas: canvasRef.current ? canvasRef.current : undefined, 
@@ -161,6 +153,7 @@ const useBlobBackground = (canvasRef: React.RefObject<HTMLCanvasElement>) => {
           update(meshSphere.geometry, meshSphere.geometry.parameters.radius, 0.8, 0.002, object.noise);
         }
         
+        TWEEN.update();
         renderer.render(scene,camera);
         requestAnimationFrame(render);
       }
@@ -176,6 +169,7 @@ const useBlobBackground = (canvasRef: React.RefObject<HTMLCanvasElement>) => {
       }
 
       window.addEventListener('resize', windowResize)
+      console.log(objectArray)
 
       return (() => window.removeEventListener('resize', windowResize))
 
@@ -183,5 +177,52 @@ const useBlobBackground = (canvasRef: React.RefObject<HTMLCanvasElement>) => {
 
 }
 
-export default useBlobBackground
+const udpateColours = (weatherCode: number, step:number) => {
+  for(let i=0;i<objectArray.length;i++){
+    let colour: THREE.Color;
+    // let backgroundColor: THREE.Color;
+    switch(weatherCode){
+      case 0: 
+        colour = new THREE.Color(`hsl(${195 + step/2*i}, 100%, 60%)`)
+        break;
+      case 1: 
+        colour = new THREE.Color(`hsl(${195 + step*i}, 100%, 50%)`)
+        break;
+      case 2: 
+        colour = new THREE.Color(`hsl(${203 + step*i}, ${70-step*i}%, 61%)`)
+        break;
+      case 3: 
+        colour = new THREE.Color(`hsl(${215 + step*i}, ${45 - step*i}%, 67%)`)
+        break;
+      case 4: 
+        colour = new THREE.Color(`hsl(${180 + step/2*i}, ${52 - step*i}%, ${80-step/2*i}%)`)
+        break;
+      case 5: 
+        colour = new THREE.Color(`hsl(${200 + step*i}, 100%, ${55 - step*i}%)`)
+        break;
+      case 6: 
+        colour = new THREE.Color(`hsl(${185 + step*i}, 100%, 50%)`)
+        break;
+      case 7: 
+        colour = new THREE.Color(`hsl(${200 - step*i}, 100%, 93%)`)
+        break;
+      case 8: 
+        colour = new THREE.Color(`hsl(${238 - step*i}, 100%, ${70 - step*i}%)`)
+        break;
+      case 9: 
+        colour = new THREE.Color(`hsl(${258 - step*i}, 40%, ${48 - step*i}%)`)
+        break;
+      default:
+        colour = new THREE.Color(`hsl(${185 + step*i}, 100%, 50%)`)
+        break;
+    }
+
+    new TWEEN.Tween(objectArray[i].object.material.uniforms.color1)
+    .to({value: colour}, 1000)
+    .easing(TWEEN.Easing.Sinusoidal.InOut)
+    .start()
+  }
+}
+
+export {useBlobBackground, udpateColours}
   

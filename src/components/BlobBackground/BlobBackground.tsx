@@ -27,7 +27,7 @@ const BlobBakcground = (props: BlobBackgroundProps): JSX.Element => {
   return (
       <div className=" relative flex items-center w-screen h-screen justify-center font-main">
         <canvas className=" absolute left-0 top-0 " ref={canvasRef}></canvas>
-        <div className={` h-fit min-h-20 max-w-sm ${firsRenderObject?.firstRender ? 'max-h-20': 'max-h-[90%]'} w-[95%]  bg-opacity-25 bg-slate-800 rounded-xl backdrop-blur-lg shadow-lg transition-all ease-in-out delay-500 duration-500 flex flex-col p-3 sm:p-6 overflow-hidden`}>
+        <div className={` h-full min-h-20 max-w-sm ${firsRenderObject?.firstRender ? 'max-h-20': 'max-h-[90%]'} w-[95%]  bg-opacity-25 bg-slate-800 rounded-xl backdrop-blur-lg shadow-lg transition-all ease-in-out delay-500 duration-500 flex flex-col p-3 sm:p-6 overflow-hidden`}>
           {props.children}
         </div>
       </div>

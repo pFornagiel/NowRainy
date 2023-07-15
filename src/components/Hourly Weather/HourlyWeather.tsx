@@ -24,16 +24,7 @@ const HourlyWeather = () => {
     const startingIndex = timeArray?.findIndex((index) => index === (new Date()).getHours());
     const indexes = generateIndexes(startingIndex, 4,3)
 
-    
-
-    
-    useEffect(() => {
-        // For loggin
-        
-    }, [weatherContextObject?.weatherObject])
-
     return ( 
-        // ${transitionContextObject?.transition}-animation`}
         <div className={` my-3 w-full h-32 bg-slate-800 rounded-xl backdrop-blur-lg bg-opacity-20 transition-all  duration-500 ${firsRenderContextObject?.firstRender ? "opacity-0" : "opacity-100"} flex justify-center items-center`}>
             {indexes.map(index => {
                 if(!index || !hourlyWeather?.weatherCode) return

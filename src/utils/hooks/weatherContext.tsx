@@ -24,9 +24,17 @@ interface currentWeatherObject  {
         randomSentence: string
 }
 
+interface forecastObject {
+    maxTemperature: number[],
+    minTemperature: number[],
+    weatherCode: number[],
+    time: number[]
+}
+
 interface weatherInformationObject{
     currentWeather : currentWeatherObject,
-    hourlyWeather : hourlyWeatherObject
+    hourlyWeather : hourlyWeatherObject,
+    forecast: forecastObject
 }
 
 interface weatherContextObject {
@@ -41,7 +49,7 @@ interface Props {
 // UTILITIES USED TO WORK WITH THE HOOK \\
 
 const fetchWeatherData = async (lat: number, log: number) => {
-    return await axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${log}&hourly=temperature_2m,weathercode&current_weather=true&timeformat=unixtime&forecast_days=2&timezone=auto&daily=temperature_2m_max,temperature_2m_min`)
+    return await axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${log}&hourly=temperature_2m,weathercode&current_weather=true&timeformat=unixtime&forecast_days=7&timezone=auto&daily=temperature_2m_max,temperature_2m_min,weathercode`)
   }
 
 // HOOK FUNCTIONS \\
@@ -95,7 +103,27 @@ const WeatherContextProvider = ({children} : Props) => {
 
         }
         const newHourlyCodesArray = weatherData.data.hourly.weathercode.map((code:number) => String(code)[0])
-        const newWeatherObject = {currentWeather: {...weatherData.data.current_weather, iconNumber: Number(weatherCode), weatherName: weatherName, maxTemperature: weatherData.data.daily.temperature_2m_max[0], minTemperature: weatherData.data.daily.temperature_2m_min[0], randomSentence: getRandomSentence(Number(weatherCode))}, hourlyWeather: {time: weatherData.data.hourly.time, weatherCode: weatherData.data.hourly.weathercode, temperature: weatherData.data.hourly.temperature_2m, iconNumber: newHourlyCodesArray}}
+        const newWeatherObject = {
+            currentWeather: {
+                ...weatherData.data.current_weather, 
+                iconNumber: Number(weatherCode), 
+                weatherName: weatherName, 
+                maxTemperature: weatherData.data.daily.temperature_2m_max[0], 
+                minTemperature: weatherData.data.daily.temperature_2m_min[0], 
+                randomSentence: getRandomSentence(Number(weatherCode))
+            }, 
+            hourlyWeather: {
+                time: weatherData.data.hourly.time, 
+                weatherCode: weatherData.data.hourly.weathercode, 
+                temperature: weatherData.data.hourly.temperature_2m, 
+                iconNumber: newHourlyCodesArray
+            },
+            forecast: {
+                maxTemperature: weatherData.data.daily.temperature_2m_max, 
+                minTemperature: weatherData.data.daily.temperature_2m_min, 
+                weatherCode: (weatherData.data.daily.weathercode),
+                time: weatherData.data.daily.time
+            }}
         setWeatherContextObject(newWeatherObject)
     }
 

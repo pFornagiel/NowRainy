@@ -6,6 +6,7 @@ import { FirstRenderContextProvider } from './utils/hooks/firstRenderContext'
 import SearchAndIcon from './components/Search and Icon/SearchAndIcon';
 import Temperature from './components/Temperature/Temperature';
 import HourlyWeather from './components/Hourly Weather/HourlyWeather'
+import Forecast from './components/Forecast/Forecast'
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
         <SearchAndIcon/>
         <Temperature/>
         <HourlyWeather/>
+        <Forecast />
       </BlobBakcground>
     </CityContextProvider>
     </TransitionContextProvider>

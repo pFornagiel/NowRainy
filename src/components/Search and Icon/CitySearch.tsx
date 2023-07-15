@@ -109,7 +109,7 @@ const CitySearch = () => {
 
 
     return ( 
-        <div className="w-full h-20 [caret-color:transparent] [caret-color:white]">
+        <div className="w-full h-20">
             <form className="w-full h-full relative inline-block from-neutral-900" action="none" placeholder="Test" onSubmit={(e) => { handleSubmit(e) }}>
                 <input 
                     ref={inputRef} 

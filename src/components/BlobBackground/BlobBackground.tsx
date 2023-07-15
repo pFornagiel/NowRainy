@@ -20,8 +20,6 @@ const BlobBakcground = (props: BlobBackgroundProps): JSX.Element => {
   useEffect(() => {
     if(!weatherContextObject?.weatherObject) return
     udpateColours(weatherContextObject?.weatherObject?.currentWeather.iconNumber, 10)
-    // udpateColours(1, 5)
-    console.log(weatherContextObject?.weatherObject)
   }, [weatherContextObject?.weatherObject])
 
   // const styleToBeReviewed = "lg:max-w-7xl"

@@ -102,31 +102,24 @@ const baseFragmentShader = `
   }
 `;
 
-// Create a new blob object and an object array
-// State quite possibly not needed WRONG!@#!@!
 
+// Setting up objectArray, camera and scene
+// Has to be done here, not in useEffect, because I need to be able to access the scene in the updateColour function (at least for now)
 const objectArray: objectTemplate[] = []
 
+const scene = new THREE.Scene();
+scene.background = new THREE.Color('hsl(215, 100%, 74%)');
+const camera = new THREE.PerspectiveCamera(10, window.innerWidth / window.innerHeight, 1, 10000);
+camera.position.z = 20;
+scene.add(camera)
+
 const useBlobBackground = (canvasRef: React.RefObject<HTMLCanvasElement>) => {
-  
-  // SETTING THINGS UP AND DISPLAYING
 
-  
   useEffect(() => {
-
-    // Setting up camera and scene
-    const scene = new THREE.Scene();
-    scene.background = new THREE.Color('hsl(215, 100%, 74%)');
-    const camera = new THREE.PerspectiveCamera(10, window.innerWidth / window.innerHeight, 1, 10000);
-    camera.position.z = 20;
-    scene.add(camera)
-
-
-    createNewBlob(1.5, 200, 200, camera, "Deepskyblue", "Ivory", objectArray, baseVertexShader, baseFragmentShader)
-    createNewBlob(2, 1400, 400, camera, 0x45c7ff, 0xd2e3fc, objectArray, baseVertexShader, baseFragmentShader)
+    createNewBlob(1.5, 200, 200, camera, "Deepskyblue", "white", objectArray, baseVertexShader, baseFragmentShader)
+    // createNewBlob(2, 1400, 400, camera, 0x45c7ff, 0xd2e3fc, objectArray, baseVertexShader, baseFragmentShader)
+    createNewBlob(2, 1400, 400, camera, 0x45c7ff, 'white', objectArray, baseVertexShader, baseFragmentShader)
     createNewBlob(1.6, 700, 800, camera, 0x5527ff, 'white', objectArray, baseVertexShader, baseFragmentShader)
-
-    // console.log(objectArray[0].object.material.uniforms.color1.value = new THREE.Color('red'))
     
     // Set up renderer
     const renderer = new THREE.WebGL1Renderer({
@@ -178,42 +171,53 @@ const useBlobBackground = (canvasRef: React.RefObject<HTMLCanvasElement>) => {
 }
 
 const udpateColours = (weatherCode: number, step:number) => {
+  let backgroundColor = new THREE.Color('hsl(215, 100%, 74%)')
   for(let i=0;i<objectArray.length;i++){
     let colour: THREE.Color;
-    // let backgroundColor: THREE.Color;
     switch(weatherCode){
       case 0: 
-        colour = new THREE.Color(`hsl(${195 + step/2*i}, 100%, 60%)`)
+        colour = new THREE.Color(`hsl(${190 + step/2*i}, 100%, 50%)`)
+        backgroundColor = new THREE.Color('hsl(215, 100%, 77%)')
         break;
       case 1: 
-        colour = new THREE.Color(`hsl(${195 + step*i}, 100%, 50%)`)
+        colour = new THREE.Color(`hsl(${192 + step*i}, 100%, 55%)`)
+        backgroundColor = new THREE.Color('hsl(215, 100%, 77%)')
         break;
       case 2: 
-        colour = new THREE.Color(`hsl(${203 + step*i}, ${70-step*i}%, 61%)`)
+        colour = new THREE.Color(`hsl(${196 + step*i}, ${100-step*i}%, 70%)`)
+        backgroundColor = new THREE.Color('hsl(217, 95%, 75%)')
         break;
       case 3: 
-        colour = new THREE.Color(`hsl(${215 + step*i}, ${45 - step*i}%, 67%)`)
+        colour = new THREE.Color(`hsl(${215 + step*i}, ${55 - step*i}%, 67%)`)
+        backgroundColor = new THREE.Color('hsl(214, 50%, 70%)')
         break;
       case 4: 
-        colour = new THREE.Color(`hsl(${180 + step/2*i}, ${52 - step*i}%, ${80-step/2*i}%)`)
+        colour = new THREE.Color(`hsl(${210 + step/2*i}, ${40 - step*i}%, ${70-step/2*i}%)`)
+        backgroundColor = new THREE.Color('hsl(214, 40%, 70%)')
         break;
       case 5: 
-        colour = new THREE.Color(`hsl(${200 + step*i}, 100%, ${55 - step*i}%)`)
+        colour = new THREE.Color(`hsl(${210 + step/2*i}, 85%, ${70 }%)`)
+        backgroundColor = new THREE.Color('hsl(215, 80%, 75%)')
         break;
       case 6: 
-        colour = new THREE.Color(`hsl(${185 + step*i}, 100%, 50%)`)
+        colour = new THREE.Color(`hsl(${210 + step/2*i}, 60%, 65%)`)
+        backgroundColor = new THREE.Color('hsl(220, 50%, 70%)')
         break;
       case 7: 
-        colour = new THREE.Color(`hsl(${200 - step*i}, 100%, 93%)`)
+        colour = new THREE.Color(`hsl(${180 + step*i}, 20%, 87%)`)
+        backgroundColor = new THREE.Color('hsl(215, 20%, 85%)')
         break;
       case 8: 
-        colour = new THREE.Color(`hsl(${238 - step*i}, 100%, ${70 - step*i}%)`)
+        colour = new THREE.Color(`hsl(${210 + step/2*i}, 80%, 65%)`)
+        backgroundColor = new THREE.Color('hsl(220, 80%, 70%)')
         break;
       case 9: 
-        colour = new THREE.Color(`hsl(${258 - step*i}, 40%, ${48 - step*i}%)`)
+        colour = new THREE.Color(`hsl(${220 + step*i}, 40%, ${38 - step*i}%)`)
+        backgroundColor = new THREE.Color('hsl(220, 20%, 60%)')
         break;
       default:
         colour = new THREE.Color(`hsl(${185 + step*i}, 100%, 50%)`)
+        backgroundColor = new THREE.Color('hsl(215, 100%, 77%)')
         break;
     }
 
@@ -222,6 +226,11 @@ const udpateColours = (weatherCode: number, step:number) => {
     .easing(TWEEN.Easing.Sinusoidal.InOut)
     .start()
   }
+
+  new TWEEN.Tween(scene)
+   .to({background: backgroundColor})
+   .easing(TWEEN.Easing.Sinusoidal.InOut)
+   .start()
 }
 
 export {useBlobBackground, udpateColours}

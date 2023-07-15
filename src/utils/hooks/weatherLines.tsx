@@ -19,31 +19,28 @@ const sunnyWeatherSentences = [
     "The sky is partly cloudy with patches of sunshine",
     "A mix of sun and clouds makes for a dreamy day",
     "Enjoy the pleasant balance of sun and clouds today",
-    "A picturesque cloudy backdrop to the sunshine",
     "A partly cloudy day - perfect for outdoor activities",
   ];
   
   const overcastSentences = [
     "The sky is completely covered in clouds today",
-    "It's an overcast day with no sign of sunshine",
     "Today the clouds have taken over the sky",
     "A blanket of gray clouds hangs overhead",
-    "The weather is overcast, but it's a great day for cozy indoor activities",
+    "The weather is overcast, but it's a great day for indoor activities",
   ];
   
   const foggySentences = [
     "Thick fog has descended, reducing visibility significantly",
-    "The air is filled with a mysterious fog",
-    "A dense fog blankets the surroundings, giving a sense of calm and serenity",
+    "A dense fog blankets the surroundings",
     "Visibility is low due to the heavy fog that envelops the area",
     "It's a foggy day, so take it slow and stay safe on the roads",
   ];
   
   const drizzleSentences = [
     "A gentle drizzle falls from the sky, creating a soothing ambiance",
-    "It's a day of light drizzle, perfect for a cozy indoor activity",
+    "It's a day of light drizzle, perfect for a indoor activities",
     "The air is filled with a mist as the drizzle continues",
-    "Enjoy the refreshing touch of the drizzle on your skin",
+    "Enjoy the refreshing touch of the drizzle",
     "It's a drizzly day, but don't let it dampen your spirits!",
   ];
   
@@ -59,13 +56,13 @@ const sunnyWeatherSentences = [
     "Snowflakes gently fall from the sky, covering the ground in a white blanket",
     "Building snowmen and having snowball fights today!",
     "Enjoy the winter wonderland!",
-    "Enjoy the beauty of the snow-covered landscape on this chilly day",
+    "Enjoy the beauty of the snow-covered landscape!",
     "Snowflakes fill the air",
   ];
   
   const showerSentences = [
-    "A sudden shower has arrived bringing refreshment",
-    "It's a day of passing showers, bringing moments of rain followed by breaks of sunshine",
+    "Make sure to take an umbrella!",
+    "It's a day of passing showers, so except moments of rain followed by sunshine",
     "The sky opens up with a brief shower washing away the dust",
     "Enjoy the rhythmic pitter-patter of raindrops during the passing shower",
     "It's a showery day, so keep your umbrella handy!",
@@ -73,7 +70,7 @@ const sunnyWeatherSentences = [
   
   const thunderstormSentences = [
     "The sky rumbles with thunder as the storm rolls in",
-    "Flashes of lightning illuminate the dark sky during ",
+    "Flashes of lightning illuminate the dark sky",
     "Remember to stay safe and don't let the weather ruin your mood!",
     "Stay indoors and seek shelter during the thunderstorm",
     "It's a stormy day with thunder and lightning, so stay safe and cozy indoors!",

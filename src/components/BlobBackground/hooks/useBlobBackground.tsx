@@ -3,24 +3,16 @@ import Perlin from '../utils/perlin3d';
 import * as THREE from "three";
 import * as TWEEN from '@tweenjs/tween.js'
 
-// INTERFACES AND TYPES DECLARATION
+// INTERFACES AND TYPES \\
 
 type MeshObject =  THREE.Mesh<THREE.SphereGeometry, THREE.ShaderMaterial> 
 
 interface objectTemplate {
   object: MeshObject,
   noise: Perlin,
-  randomness: number,
-  speed: speed
 }
 
-interface speed {
-  x: number,
-  y: number
-}
-
-
-// UTILITY BLOB FUNCTIONS 
+// UTILITY BLOB FUNCTIONS  \\
 
 const createNewBlob = (radius: number, xStratingOffset:number, yStartingOffset: number, camera: THREE.PerspectiveCamera, color1Value: THREE.ColorRepresentation, color2Value: THREE.ColorRepresentation, objectArray: objectTemplate[], vertexShader: string, fragmentShader: string) => {
     const material = new THREE.ShaderMaterial({
@@ -39,8 +31,8 @@ const createNewBlob = (radius: number, xStratingOffset:number, yStartingOffset: 
         new THREE.SphereGeometry(radius,128,128),
         material
     )
-    // POSITIONING RELATIVE TO SCREEN
 
+    // POSITIONING RELATIVE TO SCREEN \\
     const pointer = new THREE.Vector2();
     pointer.x = ( xStratingOffset/ window.innerWidth ) * 2 - 1;
     pointer.y = - ( yStartingOffset / window.innerHeight ) * 2 + 1;
@@ -59,15 +51,18 @@ const createNewBlob = (radius: number, xStratingOffset:number, yStartingOffset: 
     object.position.copy(point)
     object.position.z = -30
 
+    // Adding noise
     const noise = new Perlin(Math.random())
-    const randomness = Math.random() * 10 + 1
 
+    // Adding to camera and pushing to array
     camera.add(object)
-    objectArray.push({object: object, noise: noise, randomness: randomness, speed: {x: (0.000001 + (Math.random() * 0.000005)) * Math.round(Math.random()) * -1, y: (0.000001 + (Math.random() * 0.000005)) * Math.round(Math.random()) * -1}})
+    objectArray.push({object: object, noise: noise})
   }
 
-  const update = (geometry: THREE.BufferGeometry, radius: number, spikes: number, agresivness : number, noise: Perlin) => {
-    const positions = geometry.attributes.position;
+  // UPDATE FUCNTION \\
+  const update = (meshObject: MeshObject, radius: number, spikes: number, agresivness : number, noise: Perlin) => {
+
+    const positions = meshObject.geometry.attributes.position;
     const time = performance.now() * agresivness;
     const v3 = new THREE.Vector3();
     for(let i = 0; i< positions.count; i++){
@@ -75,10 +70,13 @@ const createNewBlob = (radius: number, xStratingOffset:number, yStartingOffset: 
         let n = noise.perlin3(v3.x + time * 0.1, v3.y + time * 0.1, v3.z + time * 0.1);
         v3.setLength(radius + 0.3 * n);
         positions.setXYZ(i, v3.x, v3.y, v3.z);
-
-    positions.needsUpdate = true;
-    // geometry.computeVertexNormals(); // causes problems
     }
+    positions.needsUpdate = true;
+    // meshObject.geometry.computeVertexNormals(); // not needed as it seems
+    
+    meshObject.rotation.x += 0.0001;
+    meshObject.rotation.y += 0.0001;
+    meshObject.position.z = -30;
 }
 
 // BASE SHADER DEFINITIONS
@@ -104,7 +102,7 @@ const baseFragmentShader = `
 
 
 // Setting up objectArray, camera and scene
-// Has to be done here, not in useEffect, because I need to be able to access the scene in the updateColour function (at least for now)
+// Has to be done here, not in useEffect, because I need to be able to access the scene in the updateColour function
 const objectArray: objectTemplate[] = []
 
 const scene = new THREE.Scene();
@@ -117,7 +115,6 @@ const useBlobBackground = (canvasRef: React.RefObject<HTMLCanvasElement>) => {
 
   useEffect(() => {
     createNewBlob(1.5, 200, 200, camera, "Deepskyblue", "white", objectArray, baseVertexShader, baseFragmentShader)
-    // createNewBlob(2, 1400, 400, camera, 0x45c7ff, 0xd2e3fc, objectArray, baseVertexShader, baseFragmentShader)
     createNewBlob(2, 1400, 400, camera, 0x45c7ff, 'white', objectArray, baseVertexShader, baseFragmentShader)
     createNewBlob(1.6, 700, 800, camera, 0x5527ff, 'white', objectArray, baseVertexShader, baseFragmentShader)
     
@@ -129,29 +126,17 @@ const useBlobBackground = (canvasRef: React.RefObject<HTMLCanvasElement>) => {
     renderer.setSize(window.innerWidth, window.innerHeight)
     renderer.setPixelRatio(window.devicePixelRatio);
 
-    const updatePosition = (speed: speed, meshObject: MeshObject, randomness : number) => {
-      meshObject.rotation.x += 0.0001;
-      meshObject.rotation.y += 0.0001;
-      meshObject.position.z = -30;
-      // meshObject.translateX(speed.x)
-      // meshObject.translateY(-speed.y)
-      // speed.x += meshObject.position.x * 0.0000005 * -1 +( Math.random() * 0.000001 + 0.000001 ) * (Math.round(Math.random())* -1) * 0.01 * Math.abs(meshObject.position.x) 
-      // speed.y += meshObject.position.y * 0.000005  +( Math.random() * 0.00001 + 0.0001 ) * (Math.round(Math.random())* -1) * 0.01 * Math.abs(meshObject.position.y) * randomness
-    }
-
     const render = () => {
         for(let object of objectArray){
           const meshSphere = object.object;
-          updatePosition(object.speed, meshSphere, object.randomness)
-          update(meshSphere.geometry, meshSphere.geometry.parameters.radius, 0.8, 0.002, object.noise);
+          // updatePosition( meshSphere )
+          update(meshSphere, meshSphere.geometry.parameters.radius, 0.8, 0.002, object.noise);
         }
         
         TWEEN.update();
         renderer.render(scene,camera);
         requestAnimationFrame(render);
       }
-      
-      
       
       const windowResize = () => {
         camera.aspect = window.innerWidth/window.innerHeight;
@@ -170,6 +155,8 @@ const useBlobBackground = (canvasRef: React.RefObject<HTMLCanvasElement>) => {
 
 }
 
+
+// UPDATE BACKGROUND COLOURS \\
 const udpateColours = (weatherCode: number, step:number) => {
   let backgroundColor = new THREE.Color('hsl(215, 100%, 74%)')
   for(let i=0;i<objectArray.length;i++){

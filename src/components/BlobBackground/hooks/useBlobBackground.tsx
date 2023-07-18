@@ -151,7 +151,7 @@ const useBlobBackground = (canvasRef: React.RefObject<HTMLCanvasElement>) => {
         requestAnimationFrame(render);
       }
       
-      requestAnimationFrame(render)
+      
       
       const windowResize = () => {
         camera.aspect = window.innerWidth/window.innerHeight;
@@ -163,7 +163,7 @@ const useBlobBackground = (canvasRef: React.RefObject<HTMLCanvasElement>) => {
 
       window.addEventListener('resize', windowResize)
       console.log(objectArray)
-
+      requestAnimationFrame(render)
       return (() => window.removeEventListener('resize', windowResize))
 
   }, [])
@@ -212,7 +212,7 @@ const udpateColours = (weatherCode: number, step:number) => {
         backgroundColor = new THREE.Color('hsl(220, 80%, 70%)')
         break;
       case 9: 
-        colour = new THREE.Color(`hsl(${220 + step*i}, 40%, ${38 - step*i}%)`)
+        colour = new THREE.Color(`hsl(${220 + step*i}, 50%, ${38 -i*step/4}%)`)
         backgroundColor = new THREE.Color('hsl(220, 20%, 60%)')
         break;
       default:

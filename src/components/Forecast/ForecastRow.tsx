@@ -8,24 +8,24 @@ interface ForecastRowProps {
     maxTemperature: number
 }
 
-const style = ' w-32 h-12 fill-white mt-[-20px] mb-[-20px] p-0 m-0 overflow'
+const style = ' w-14 h-10 fill-white p-0 inline-block '
 const iconArray = getIconArray(style)
 
 const ForecastRow = ({day, weatherCode, minTemperature, maxTemperature} : ForecastRowProps) => {
     const transtiionContexObject = useTransitionContext();
     const dateDate = new Date(day*1000)
-    const formatedWeekDay = dateDate.getDay() === (new Date()).getDay() ? 'Today' : dateDate.toLocaleDateString('en-US', { weekday: 'short' });
+    const formatedWeekDay = dateDate.getDay() === (new Date()).getDay() ? 'Today' : dateDate.toLocaleDateString('en-US', { weekday: 'long' });
     const formatedWeatherCode = Number(String(weatherCode)[0])
     const formatedMinTemperature = Math.round(minTemperature)
     const formatedMaxTemperature = Math.round(maxTemperature)
 
     return ( 
-        <div className={`w-full h-8 flex items-center justify-evenly text-white ${transtiionContexObject?.transition}-animation`}>
-            <h6>{formatedWeekDay}</h6>
-            {iconArray[formatedWeatherCode]}
-            <h6>{`H:${formatedMinTemperature} L:${formatedMaxTemperature}`}</h6>
-
-
+        <div className={`w-full h-10 flex items-center justify-between text-white ${transtiionContexObject?.transition}-animation text-lg my-2`}>
+            <div>
+                {iconArray[formatedWeatherCode]}
+                <h6 className=" text-left w-12 ml-2 inline-block">{formatedWeekDay}</h6>
+            </div>
+            <h6 className="mr-4"><span className=" text-gray-200 ">{`${formatedMinTemperature}º`}</span> |  {`${formatedMaxTemperature}º`}</h6>
         </div>
      );
 }

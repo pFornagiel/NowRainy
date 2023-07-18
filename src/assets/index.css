@@ -10,3 +10,32 @@
 .exit-animation {
     @apply animate-hide [animation-fill-mode:forwards]
 }
+
+/* Scrollbar */
+
+::-webkit-scrollbar {
+    @apply rounded-lg w-0 
+}
+
+::-webkit-scrollbar-track {
+    @apply bg-transparent
+}
+
+/* Transition on text size change, because I want it to be quicker than the other one */
+
+.text-transition{
+    transition: font-size 100ms ease-out 
+}
+
+.p-transition{
+    transition: all 500ms ease-out 
+}
+
+svg path{
+    fill: white
+}
+
+/* This is for mobile but still broken, no patience to fix it */
+body{
+    overflow: hidden
+}

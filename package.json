@@ -8,12 +8,13 @@
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "start": "npx http-server -P http://0.0.0.0:${PORT} ./dist"
+    "start": "npx http-server -a 0.0.0.0 -p $PORT ./dist"
   },
   "dependencies": {
     "@tweenjs/tween.js": "^21.0.0",
     "@types/three": "^0.152.1",
     "axios": "^1.4.0",
+    "http-server": "^14.1.1",
     "lodash": "^4.17.21",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

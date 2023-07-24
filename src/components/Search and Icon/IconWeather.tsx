@@ -5,9 +5,9 @@ import { useFirstRenderContext } from "../../utils/hooks/firstRenderContext";
 import getIconArray from "../../utils/getIconArray";
 
 
-const style = "w-full h-20 fill-white mt-[-15px] ml-[10px]"
 
-// Maybe not the most elegant of solutions, but works fine
+// Set up the Universal Icon Array
+const style = "w-full h-20 fill-white mt-[-8px] ml-[10px]"
 const iconArray = getIconArray(style);
 
 const IconWeather = () => {

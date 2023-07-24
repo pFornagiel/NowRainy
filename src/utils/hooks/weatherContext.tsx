@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useContext, useState } from "react";
 import axios from "axios";
-import { getRandomSentence } from "./weatherLines";
+import { getRandomSentence } from "../weatherLines";
 
 interface hourlyWeatherObject  {
     time: number[],

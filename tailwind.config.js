@@ -11,6 +11,7 @@ export default {
     },
     screens:{
       'xs': '450px',
+      'minHeight' : {'raw' : '(max-height: 600px)'},
       ...defaultTheme.screens,
     },
     extend: {

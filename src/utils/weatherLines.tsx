@@ -1,15 +1,15 @@
 // Weather quotes arrays
 const sunnyWeatherSentences = [
-    "Shining as brightly as ever",
+    "Shining as brightly as ever!",
     "It's a perfect day to soak up some sun",
     "Clear skies and abundant sunshine",
     "Enjoy the warmth of the sun today",
-    "A perfect day for stargazing with only few clouds dotting the sky",
+    "A perfect day for stargazing!",
   ];
 
   const clearWeatherSentences = [
     "The sky is a canvas of clear blue",
-    "Bask in the warmth of the sun on this clear day!",
+    "Time to bask in the warmth of the sun!",
     "Smile with clear skies and abundant sunshine!",
     "Enjoy the crystal-clear sky today!",
   ];
@@ -17,63 +17,59 @@ const sunnyWeatherSentences = [
 
   const partlyCloudySentences = [
     "The sky is partly cloudy with patches of sunshine",
-    "A mix of sun and clouds makes for a dreamy day",
-    "Enjoy the pleasant balance of sun and clouds today",
-    "A partly cloudy day - perfect for outdoor activities",
+    "A dreamy day of both sun and clouds",
+    "Enjoy the pleasant mix of sun and clouds!",
+    "A day perfect for outdoor activities!",
   ];
   
   const overcastSentences = [
     "The sky is completely covered in clouds today",
-    "Today the clouds have taken over the sky",
+    "The clouds have taken over the sky",
     "A blanket of gray clouds hangs overhead",
-    "The weather is overcast, but it's a great day for indoor activities",
+    "A great day for indoor activities!",
   ];
   
   const foggySentences = [
-    "Thick fog has descended, reducing visibility significantly",
+    "Thick fog has descended, reducing visibility",
     "A dense fog blankets the surroundings",
-    "Visibility is low due to the heavy fog that envelops the area",
-    "It's a foggy day, so take it slow and stay safe on the roads",
+    "Visibility is low due to the heavy fog",
+    "Take it slow and stay safe on the roads",
   ];
   
   const drizzleSentences = [
-    "A gentle drizzle falls from the sky, creating a soothing ambiance",
-    "It's a day of light drizzle, perfect for a indoor activities",
+    "Gentle drizzle falls from the sky",
+    "A light drizzle - perfect for indoor activities",
     "The air is filled with a mist as the drizzle continues",
     "Enjoy the refreshing touch of the drizzle",
-    "It's a drizzly day, but don't let it dampen your spirits!",
+    "Don't let the drizzle dampen your spirits!",
   ];
   
   const rainySentences = [
-    "Raindrops fall from the sky, creating a rhythmic melody",
-    "It's a rainy day, perfect for staying cozy indoors",
-    "The sound of rain soothes the soul as it taps against the windows",
-    "Umbrellas are out as the rain showers the earth",
+    "Nothing better rhythmic melody of rain",
+    "Rainy day perfect for staying cozy indoors",
+    "Raindrops tapping against the windows",
     "Don't forget your umbrella!",
   ];
   
   const snowySentences = [
-    "Snowflakes gently fall from the sky, covering the ground in a white blanket",
+    "Snowflakes gently falling from the sky",
     "Building snowmen and having snowball fights today!",
     "Enjoy the winter wonderland!",
     "Enjoy the beauty of the snow-covered landscape!",
-    "Snowflakes fill the air",
   ];
   
   const showerSentences = [
     "Make sure to take an umbrella!",
-    "It's a day of passing showers, so except moments of rain followed by sunshine",
+    "Except moments of rain followed by sunshine",
     "The sky opens up with a brief shower washing away the dust",
-    "Enjoy the rhythmic pitter-patter of raindrops during the passing shower",
     "It's a showery day, so keep your umbrella handy!",
   ];
   
   const thunderstormSentences = [
     "The sky rumbles with thunder as the storm rolls in",
     "Flashes of lightning illuminate the dark sky",
-    "Remember to stay safe and don't let the weather ruin your mood!",
+    "Remember to stay safe during the storm!",
     "Stay indoors and seek shelter during the thunderstorm",
-    "It's a stormy day with thunder and lightning, so stay safe and cozy indoors!",
   ];
   
 const getRandomSentence = (weatherCode:number) => {

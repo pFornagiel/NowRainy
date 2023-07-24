@@ -1,12 +1,10 @@
-import BlobBakcground from './components/BlobBackground/BlobBackground'
-import { WeatherContextProvider } from './utils/hooks/weatherContext'
-import { CityContextProvider } from './utils/hooks/cityContext'
-import { TransitionContextProvider } from './utils/hooks/transitionContext'
-import { FirstRenderContextProvider } from './utils/hooks/firstRenderContext'
+import BlobBackground from './components/BlobBackground/BlobBackground'
+import { WeatherContextProvider, TransitionContextProvider, FirstRenderContextProvider, CityContextProvider } from './utils/hooks/contextProviders';
 import SearchAndIcon from './components/Search and Icon/SearchAndIcon';
 import Temperature from './components/Temperature/Temperature';
 import HourlyWeather from './components/Hourly Weather/HourlyWeather'
 import Forecast from './components/Forecast/Forecast'
+import RandomSentence from './components/RandomSentence/RandomSentence'
 
 function App() {
 
@@ -16,12 +14,13 @@ function App() {
     <WeatherContextProvider>
     <TransitionContextProvider>
     <CityContextProvider>
-      <BlobBakcground >   
+      <BlobBackground >   
         <SearchAndIcon/>
         <Temperature/>
+        <RandomSentence />
         <HourlyWeather/>
         <Forecast />
-      </BlobBakcground>
+      </BlobBackground>
     </CityContextProvider>
     </TransitionContextProvider>
     </WeatherContextProvider>

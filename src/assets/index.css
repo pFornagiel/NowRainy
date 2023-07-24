@@ -14,11 +14,11 @@
 /* Scrollbar */
 
 ::-webkit-scrollbar {
-    @apply rounded-lg w-0 
+    @apply rounded-lg w-0; 
 }
 
 ::-webkit-scrollbar-track {
-    @apply bg-transparent
+    @apply bg-transparent;
 }
 
 /* Transition on text size change, because I want it to be quicker than the other one */
@@ -35,7 +35,3 @@ svg path{
     fill: white
 }
 
-/* This is for mobile but still broken, no patience to fix it */
-body{
-    overflow: hidden
-}

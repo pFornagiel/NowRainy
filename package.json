@@ -8,7 +8,7 @@
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "start": "vite"
+    "start": "npx http-server ./dist"
   },
   "dependencies": {
     "@tweenjs/tween.js": "^21.0.0",

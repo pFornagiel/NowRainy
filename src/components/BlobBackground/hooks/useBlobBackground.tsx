@@ -114,6 +114,18 @@ const camera = new THREE.PerspectiveCamera(10, window.innerWidth / window.innerH
 camera.position.z = 20;
 scene.add(camera)
 
+// Utility functions to create blob objects and make code more readable later when dealing with different screen sizes
+const createFirstBlob = (width:number, height:number) : void => {
+  createNewBlob(1.5, width, height, camera, "Deepskyblue", "white", objectArray, baseVertexShader, baseFragmentShader)
+}
+
+const createSecondBlob = (width:number, height:number) : void => {
+  createNewBlob(2, width , height, camera, 0x45c7ff, 'white', objectArray, baseVertexShader, baseFragmentShader)
+}
+
+const createThirdBlob = (width:number, height:number) : void => {
+  createNewBlob(1.6, width, height, camera, 0x5527ff, 'white', objectArray, baseVertexShader, baseFragmentShader)  
+} 
 
 const useBlobBackground = (canvasRef: React.RefObject<HTMLCanvasElement>) => {
 
@@ -121,10 +133,25 @@ const useBlobBackground = (canvasRef: React.RefObject<HTMLCanvasElement>) => {
   if(isMobile) return
 
   useEffect(() => {
-    createNewBlob(1.5, 200, 200, camera, "Deepskyblue", "white", objectArray, baseVertexShader, baseFragmentShader)
-    createNewBlob(2, 1400, 400, camera, 0x45c7ff, 'white', objectArray, baseVertexShader, baseFragmentShader)
-    createNewBlob(1.6, 700, 800, camera, 0x5527ff, 'white', objectArray, baseVertexShader, baseFragmentShader)
-    
+    // Creating blobs in accordance to screen size
+    createFirstBlob(window.innerWidth/6, window.innerHeight/5)
+    if(window.innerWidth < 800){
+      createThirdBlob(window.innerWidth-100, window.innerHeight - window.innerHeight/10)
+    }
+    if(window.innerWidth >= 800 && window.innerWidth < 1100){
+      createSecondBlob(window.innerWidth,window.innerHeight/3)
+      createThirdBlob(window.innerWidth/2, window.innerHeight - window.innerHeight/10)
+    }
+    if(window.innerWidth >= 1100 && window.innerWidth<1550){
+      createSecondBlob(window.innerWidth-150,window.innerHeight/3)
+      createThirdBlob(window.innerWidth/2-150, window.innerHeight - window.innerHeight/10)
+      
+    }
+    if( window.innerWidth>=1550){
+      createSecondBlob(window.innerWidth-280,window.innerHeight/3)
+      createThirdBlob(window.innerWidth/2-150, window.innerHeight - window.innerHeight/10)
+    }
+   
     // Set up renderer
     const renderer = new THREE.WebGL1Renderer({
         canvas: canvasRef.current ? canvasRef.current : undefined, 

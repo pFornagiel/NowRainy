@@ -22,7 +22,7 @@ const HourlyWeather = () => {
     const indexes = generateIndexes(startingIndex, 4, 3)
 
     return (
-        <div className={` my-3 w-full h-32 min-h-[8rem] bg-slate-800 rounded-xl backdrop-blur-lg shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] bg-opacity-20 transition-all  duration-500 ${firsRenderContextObject?.firstRender ? "opacity-0" : "opacity-100"} flex justify-center items-center`}>
+        <div className={`my-3 w-full h-32 min-h-[8rem] bg-slate-800 rounded-xl backdrop-blur-lg shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] bg-opacity-20 transition-all  duration-500 ${firsRenderContextObject?.firstRender ? "opacity-0" : "opacity-100"} flex justify-center items-center`}>
             {indexes.map(index => {
                 if(!index || !hourlyWeather?.weatherCode) return
                 return (

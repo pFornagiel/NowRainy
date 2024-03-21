@@ -32,4 +32,4 @@ interface weatherInformationObject {
   forecast: forecastObject
 }
 
-export {weatherInformationObject}
+export type {weatherInformationObject}

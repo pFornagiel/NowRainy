@@ -1,5 +1,5 @@
 ﻿# NowRainy Weather App 🌧️
-A simple React.js weather application made as a side hustle, which allows you to review today's weather in city of choice.
+A simple React.js weather application, which allows you to review today's weather in city of choice. The main goal of creating the app was to practice and try out technologies such as Tailwind and THREE.js.
 
 ## OpenMeteo Weather API
 Project made possible thanks to the [OpenMeteo](https://open-meteo.com/) free Weather Forecast and Geocoding API.

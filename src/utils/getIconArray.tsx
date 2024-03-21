@@ -1,4 +1,4 @@
-import { Icon_0, Icon_1, Icon_2, Icon_3, Icon_4, Icon_5, Icon_6, Icon_7, Icon_8, Icon_9 } from '../assets/icons';
+import { Icon_0, Icon_1, Icon_2, Icon_3, Icon_4, Icon_5, Icon_6, Icon_7, Icon_8, Icon_9 } from '@/assets/icons';
 
 const getIconArray = (style: string): JSX.Element[] => {
   const iconArray = [<Icon_0 className={style}></Icon_0>,

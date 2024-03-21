@@ -1,7 +1,7 @@
 import * as TWEEN from '@tweenjs/tween.js'
 import * as THREE from "three";
 import { checkIfMobile } from './renderUtilities';
-import { objectTemplate } from '../types/components/BlobBackground/IBlob';
+import { objectTemplate } from '@/types/components/BlobBackground/IBlob';
 
 // Mobile device check - THREE.js being too demanding for mobile devices 
 const isMobile = checkIfMobile()

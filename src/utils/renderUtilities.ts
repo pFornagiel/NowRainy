@@ -1,7 +1,7 @@
-import Perlin from "../types/utils/perlin3d";
+import Perlin from "@/types/utils/perlin3d";
 import * as THREE from "three";
 import * as TWEEN from '@tweenjs/tween.js'
-import { MeshObject, objectTemplate } from "../types/components/BlobBackground/IBlob";
+import { MeshObject, objectTemplate } from "@/types/components/BlobBackground/IBlob";
 
 const createNewBlob = (radius: number, xStratingOffset: number, yStartingOffset: number, camera: THREE.PerspectiveCamera, color1Value: THREE.ColorRepresentation, color2Value: THREE.ColorRepresentation, objectArray: objectTemplate[], vertexShader: string, fragmentShader: string) => {
   const material = new THREE.ShaderMaterial({

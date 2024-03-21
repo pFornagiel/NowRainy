@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useContext, useState } from "react";
 import axios from "axios";
-import { getRandomSentence } from "../utils/weatherLines";
+import getRandomSentence from "../utils/weatherLines";
 import { Props, weatherContextObject } from "@/types/utils/IContext";
 import { weatherInformationObject } from "@/types/utils/IWeatherInformation";
 

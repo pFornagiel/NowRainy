@@ -113,4 +113,4 @@ const getRandomSentence = (weatherCode: number) => {
   return weatherArray[randomIndex];
 }
 
-export { getRandomSentence }
+export default getRandomSentence

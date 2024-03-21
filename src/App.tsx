@@ -1,5 +1,5 @@
 import BlobBackground from './components/BlobBackground/BlobBackground'
-import { WeatherContextProvider, TransitionContextProvider, FirstRenderContextProvider, CityContextProvider } from './utils/hooks/contextProviders';
+import { WeatherContextProvider, TransitionContextProvider, FirstRenderContextProvider, CityContextProvider } from './context/contextProviders';
 import SearchAndIcon from './components/Search and Icon/SearchAndIcon';
 import Temperature from './components/Temperature/Temperature';
 import HourlyWeather from './components/Hourly Weather/HourlyWeather'
@@ -11,19 +11,19 @@ function App() {
   return (
 
     <FirstRenderContextProvider>
-    <WeatherContextProvider>
-    <TransitionContextProvider>
-    <CityContextProvider>
-      <BlobBackground >   
-        <SearchAndIcon/>
-        <Temperature/>
-        <RandomSentence />
-        <HourlyWeather/>
-        <Forecast />
-      </BlobBackground>
-    </CityContextProvider>
-    </TransitionContextProvider>
-    </WeatherContextProvider>
+      <WeatherContextProvider>
+        <TransitionContextProvider>
+          <CityContextProvider>
+            <BlobBackground >
+              <SearchAndIcon />
+              <Temperature />
+              <RandomSentence />
+              <HourlyWeather />
+              <Forecast />
+            </BlobBackground>
+          </CityContextProvider>
+        </TransitionContextProvider>
+      </WeatherContextProvider>
     </FirstRenderContextProvider>
   )
 }

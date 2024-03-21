@@ -1,13 +1,12 @@
 import { useEffect, useRef } from "react";
-import { useBlobBackground, udpateColours } from "./hooks/useBlobBackground";
-import { useFirstRenderContext } from "../../utils/hooks/firstRenderContext";
-import { useWeatherContext } from "../../utils/hooks/weatherContext";
+import useBlobBackground from "./useBlobBackground";
+import { useFirstRenderContext } from "@/context/firstRenderContext";
+import { useWeatherContext } from "@/context/weatherContext";
+import updateColours from "@/utils/updateColours";
+import { objectArray, scene } from "@/utils/renderUtilities";
+import { BlobBackgroundProps } from "@/types/components/BlobBackground/IBlob";
 
-// INTERFACES AND TYPES DECLARATION \\
 
-interface BlobBackgroundProps {
-  children: JSX.Element | JSX.Element[],
-}
 
 const BlobBackground = (props: BlobBackgroundProps): JSX.Element => {
   const firsRenderObject = useFirstRenderContext();
@@ -20,7 +19,7 @@ const BlobBackground = (props: BlobBackgroundProps): JSX.Element => {
   // Change background colours whenever weather changes
   useEffect(() => {
     if (!weatherContextObject?.weatherObject) return
-    udpateColours(weatherContextObject?.weatherObject?.currentWeather.iconNumber, 10, canvasRef)
+    updateColours(objectArray, scene, weatherContextObject?.weatherObject?.currentWeather.iconNumber, 10, canvasRef)
   }, [weatherContextObject?.weatherObject])
 
   return (

@@ -10,7 +10,7 @@ const sunnyWeatherSentences = [
 const clearWeatherSentences = [
   "The sky is a canvas of clear blue",
   "Time to bask in the warmth of the sun!",
-  "Smile with clear skies and abundant sunshine!",
+  "Clear skies and abundant sunshine",
   "Enjoy the crystal-clear sky today!",
 ];
 
@@ -18,7 +18,6 @@ const clearWeatherSentences = [
 const partlyCloudySentences = [
   "The sky is partly cloudy with patches of sunshine",
   "A dreamy day of both sun and clouds",
-  "Enjoy the pleasant mix of sun and clouds!",
   "A day perfect for outdoor activities!",
 ];
 
@@ -40,12 +39,10 @@ const drizzleSentences = [
   "Gentle drizzle falls from the sky",
   "A light drizzle - perfect for indoor activities",
   "The air is filled with a mist as the drizzle continues",
-  "Enjoy the refreshing touch of the drizzle",
   "Don't let the drizzle dampen your spirits!",
 ];
 
 const rainySentences = [
-  "Nothing better rhythmic melody of rain",
   "Rainy day perfect for staying cozy indoors",
   "Raindrops tapping against the windows",
   "Don't forget your umbrella!",
@@ -61,7 +58,6 @@ const snowySentences = [
 const showerSentences = [
   "Make sure to take an umbrella!",
   "Except moments of rain followed by sunshine",
-  "The sky opens up with a brief shower washing away the dust",
   "It's a showery day, so keep your umbrella handy!",
 ];
 

@@ -19,6 +19,7 @@ const ForecastRow = ({ day, weatherCode, minTemperature, maxTemperature }: Forec
   const formatedWeatherCode = Number(String(weatherCode)[0])
   const formatedMinTemperature = Math.round(minTemperature)
   const formatedMaxTemperature = Math.round(maxTemperature)
+  const offset = formatedMaxTemperature > 9 ? <></> : <>&nbsp;</>
 
   return (
     <div className={`w-full h-10 flex items-center justify-between text-white ${transitionContexObject?.transition}-animation text-lg my-2`}>
@@ -27,7 +28,7 @@ const ForecastRow = ({ day, weatherCode, minTemperature, maxTemperature }: Forec
         <h6 className=" text-left w-12 ml-2 inline-block">{formatedWeekDay}</h6>
       </div>
       <h6 className="mr-4">
-        <span className=" text-gray-200 ">{`${formatedMinTemperature}º`}</span> |  {`${formatedMaxTemperature}º`}
+        <span className=" text-gray-200 ">{`${formatedMinTemperature}º`}</span> |  {`${formatedMaxTemperature}º`}{offset}
       </h6>
     </div>
   );

@@ -9,6 +9,7 @@
     "paths": {
       "@/*": ["./src/*"]
     },
+    "declaration": true,
 
     /* Bundler mode */
     "moduleResolution": "Node",
@@ -24,6 +25,6 @@
     "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": true,
   },
-  "include": ["src"],
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

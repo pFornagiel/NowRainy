@@ -1,4 +1,4 @@
-import Perlin from "../../../types/utils/perlin3d"
+import Perlin from "../../utils/perlin3d"
 
 type MeshObject = THREE.Mesh<THREE.SphereGeometry, THREE.ShaderMaterial>
 
@@ -11,4 +11,4 @@ interface BlobBackgroundProps {
   children: JSX.Element | JSX.Element[],
 }
 
-export {BlobBackgroundProps, objectTemplate, MeshObject}
+export type {BlobBackgroundProps, objectTemplate, MeshObject}

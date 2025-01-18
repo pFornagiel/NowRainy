@@ -54,7 +54,7 @@ const update = (meshObject: MeshObject, radius: number, spikes: number, agresivn
   const v3 = new THREE.Vector3();
   for (let i = 0; i < positions.count; i++) {
     v3.fromBufferAttribute(positions, i).setLength(spikes);
-    let n = noise.perlin3(v3.x + time * 0.1, v3.y + time * 0.1, v3.z + time * 0.1);
+    const n = noise.perlin3(v3.x + time * 0.1, v3.y + time * 0.1, v3.z + time * 0.1);
     v3.setLength(radius + 0.3 * n);
     positions.setXYZ(i, v3.x, v3.y, v3.z);
   }
@@ -66,7 +66,7 @@ const update = (meshObject: MeshObject, radius: number, spikes: number, agresivn
 }
 
 const render = (objectArray: objectTemplate[], renderer: THREE.WebGL1Renderer) => {
-  for (let object of objectArray) {
+  for (const object of objectArray) {
     const meshSphere = object.object;
     update(meshSphere, meshSphere.geometry.parameters.radius, 0.8, 0.002, object.noise);
   }

@@ -88,12 +88,12 @@ class Perlin {
     simplex2(xin: number, yin: number): number {
         let n0: number, n1: number, n2: number; // Noise contributions from the three corners
         // Skew the input space to determine which simplex cell we're in
-        let s = (xin + yin) * this.F2; // Hairy factor for 2D
+        const s = (xin + yin) * this.F2; // Hairy factor for 2D
         let i = Math.floor(xin + s);
         let j = Math.floor(yin + s);
-        let t = (i + j) * this.G2;
-        let x0 = xin - i + t; // The x,y distances from the cell origin, unskewed.
-        let y0 = yin - j + t;
+        const t = (i + j) * this.G2;
+        const x0 = xin - i + t; // The x,y distances from the cell origin, unskewed.
+        const y0 = yin - j + t;
         // For the 2D case, the simplex shape is an equilateral triangle.
         // Determine which simplex we are in.
         let i1: number, j1: number; // Offsets for second (middle) corner of simplex in (i,j) coords
@@ -109,16 +109,16 @@ class Perlin {
         // A step of (1,0) in (i,j) means a step of (1-c,-c) in (x,y), and
         // a step of (0,1) in (i,j) means a step of (-c,1-c) in (x,y), where
         // c = (3-sqrt(3))/6
-        let x1 = x0 - i1 + this.G2; // Offsets for middle corner in (x,y) unskewed coords
-        let y1 = y0 - j1 + this.G2;
-        let x2 = x0 - 1 + 2 * this.G2; // Offsets for last corner in (x,y) unskewed coords
-        let y2 = y0 - 1 + 2 * this.G2;
+        const x1 = x0 - i1 + this.G2; // Offsets for middle corner in (x,y) unskewed coords
+        const y1 = y0 - j1 + this.G2;
+        const x2 = x0 - 1 + 2 * this.G2; // Offsets for last corner in (x,y) unskewed coords
+        const y2 = y0 - 1 + 2 * this.G2;
         // Work out the hashed gradient indices of the three simplex corners
         i &= 255;
         j &= 255;
-        let gi0 = this.gradP[i + this.perm[j]];
-        let gi1 = this.gradP[i + i1 + this.perm[j + j1]];
-        let gi2 = this.gradP[i + 1 + this.perm[j + 1]];
+        const gi0 = this.gradP[i + this.perm[j]];
+        const gi1 = this.gradP[i + i1 + this.perm[j + j1]];
+        const gi2 = this.gradP[i + 1 + this.perm[j + 1]];
         // Calculate the contribution from the three corners
         let t0 = 0.5 - x0 * x0 - y0 * y0;
         if (t0 < 0) {
@@ -150,15 +150,15 @@ class Perlin {
         let n0: number, n1: number, n2: number, n3: number; // Noise contributions from the four corners
 
         // Skew the input space to determine which simplex cell we're in
-        let s = (xin + yin + zin) * this.F3; // Hairy factor for 2D
+        const s = (xin + yin + zin) * this.F3; // Hairy factor for 2D
         let i = Math.floor(xin + s);
         let j = Math.floor(yin + s);
         let k = Math.floor(zin + s);
 
-        let t = (i + j + k) * this.G3;
-        let x0 = xin - i + t; // The x,y distances from the cell origin, unskewed.
-        let y0 = yin - j + t;
-        let z0 = zin - k + t;
+        const t = (i + j + k) * this.G3;
+        const x0 = xin - i + t; // The x,y distances from the cell origin, unskewed.
+        const y0 = yin - j + t;
+        const z0 = zin - k + t;
 
         // For the 3D case, the simplex shape is a slightly irregular tetrahedron.
         // Determine which simplex we are in.
@@ -215,26 +215,26 @@ class Perlin {
         // a step of (0,1,0) in (i,j,k) means a step of (-c,1-c,-c) in (x,y,z), and
         // a step of (0,0,1) in (i,j,k) means a step of (-c,-c,1-c) in (x,y,z), where
         // c = 1/6.
-        let x1 = x0 - i1 + this.G3; // Offsets for second corner
-        let y1 = y0 - j1 + this.G3;
-        let z1 = z0 - k1 + this.G3;
+        const x1 = x0 - i1 + this.G3; // Offsets for second corner
+        const y1 = y0 - j1 + this.G3;
+        const z1 = z0 - k1 + this.G3;
 
-        let x2 = x0 - i2 + 2 * this.G3; // Offsets for third corner
-        let y2 = y0 - j2 + 2 * this.G3;
-        let z2 = z0 - k2 + 2 * this.G3;
+        const x2 = x0 - i2 + 2 * this.G3; // Offsets for third corner
+        const y2 = y0 - j2 + 2 * this.G3;
+        const z2 = z0 - k2 + 2 * this.G3;
 
-        let x3 = x0 - 1 + 3 * this.G3; // Offsets for fourth corner
-        let y3 = y0 - 1 + 3 * this.G3;
-        let z3 = z0 - 1 + 3 * this.G3;
+        const x3 = x0 - 1 + 3 * this.G3; // Offsets for fourth corner
+        const y3 = y0 - 1 + 3 * this.G3;
+        const z3 = z0 - 1 + 3 * this.G3;
 
         // Work out the hashed gradient indices of the four simplex corners
         i &= 255;
         j &= 255;
         k &= 255;
-        let gi0 = this.gradP[i + this.perm[j + this.perm[k]]];
-        let gi1 = this.gradP[i + i1 + this.perm[j + j1 + this.perm[k + k1]]];
-        let gi2 = this.gradP[i + i2 + this.perm[j + j2 + this.perm[k + k2]]];
-        let gi3 = this.gradP[i + 1 + this.perm[j + 1 + this.perm[k + 1]]];
+        const gi0 = this.gradP[i + this.perm[j + this.perm[k]]];
+        const gi1 = this.gradP[i + i1 + this.perm[j + j1 + this.perm[k + k1]]];
+        const gi2 = this.gradP[i + i2 + this.perm[j + j2 + this.perm[k + k2]]];
+        const gi3 = this.gradP[i + 1 + this.perm[j + 1 + this.perm[k + 1]]];
 
         // Calculate the contribution from the four corners
         let t0 = 0.6 - x0 * x0 - y0 * y0 - z0 * z0;
@@ -291,13 +291,13 @@ class Perlin {
         Y = Y & 255;
 
         // Calculate noise contributions from each of the four corners
-        let n00 = this.gradP[X + this.perm[Y]].dot2(x, y);
-        let n01 = this.gradP[X + this.perm[Y + 1]].dot2(x, y - 1);
-        let n10 = this.gradP[X + 1 + this.perm[Y]].dot2(x - 1, y);
-        let n11 = this.gradP[X + 1 + this.perm[Y + 1]].dot2(x - 1, y - 1);
+        const n00 = this.gradP[X + this.perm[Y]].dot2(x, y);
+        const n01 = this.gradP[X + this.perm[Y + 1]].dot2(x, y - 1);
+        const n10 = this.gradP[X + 1 + this.perm[Y]].dot2(x - 1, y);
+        const n11 = this.gradP[X + 1 + this.perm[Y + 1]].dot2(x - 1, y - 1);
 
         // Compute the fade curve value for x
-        let u = this.fade(x);
+        const u = this.fade(x);
 
         // Interpolate the four results
         return this.lerp(this.lerp(n00, n10, u), this.lerp(n01, n11, u), this.fade(y));
@@ -318,19 +318,19 @@ class Perlin {
         Z = Z & 255;
 
         // Calculate noise contributions from each of the eight corners
-        let n000 = this.gradP[X + this.perm[Y + this.perm[Z]]].dot3(x, y, z);
-        let n001 = this.gradP[X + this.perm[Y + this.perm[Z + 1]]].dot3(x, y, z - 1);
-        let n010 = this.gradP[X + this.perm[Y + 1 + this.perm[Z]]].dot3(x, y - 1, z);
-        let n011 = this.gradP[X + this.perm[Y + 1 + this.perm[Z + 1]]].dot3(x, y - 1, z - 1);
-        let n100 = this.gradP[X + 1 + this.perm[Y + this.perm[Z]]].dot3(x - 1, y, z);
-        let n101 = this.gradP[X + 1 + this.perm[Y + this.perm[Z + 1]]].dot3(x - 1, y, z - 1);
-        let n110 = this.gradP[X + 1 + this.perm[Y + 1 + this.perm[Z]]].dot3(x - 1, y - 1, z);
-        let n111 = this.gradP[X + 1 + this.perm[Y + 1 + this.perm[Z + 1]]].dot3(x - 1, y - 1, z - 1);
+        const n000 = this.gradP[X + this.perm[Y + this.perm[Z]]].dot3(x, y, z);
+        const n001 = this.gradP[X + this.perm[Y + this.perm[Z + 1]]].dot3(x, y, z - 1);
+        const n010 = this.gradP[X + this.perm[Y + 1 + this.perm[Z]]].dot3(x, y - 1, z);
+        const n011 = this.gradP[X + this.perm[Y + 1 + this.perm[Z + 1]]].dot3(x, y - 1, z - 1);
+        const n100 = this.gradP[X + 1 + this.perm[Y + this.perm[Z]]].dot3(x - 1, y, z);
+        const n101 = this.gradP[X + 1 + this.perm[Y + this.perm[Z + 1]]].dot3(x - 1, y, z - 1);
+        const n110 = this.gradP[X + 1 + this.perm[Y + 1 + this.perm[Z]]].dot3(x - 1, y - 1, z);
+        const n111 = this.gradP[X + 1 + this.perm[Y + 1 + this.perm[Z + 1]]].dot3(x - 1, y - 1, z - 1);
 
         // Compute the fade curve value for x, y, z
-        let u = this.fade(x);
-        let v = this.fade(y);
-        let w = this.fade(z);
+        const u = this.fade(x);
+        const v = this.fade(y);
+        const w = this.fade(z);
 
         // Interpolate
         return this.lerp(

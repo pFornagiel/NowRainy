@@ -34,4 +34,4 @@ interface Props {
   children: React.ReactNode
 }
 
-export {cityContextObject, cityInformationObject, firstRenderContextObject, transitionContextObject, transitionName, weatherContextObject, Props}
+export type {cityContextObject, cityInformationObject, firstRenderContextObject, transitionContextObject, transitionName, weatherContextObject, Props}

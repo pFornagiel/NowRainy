@@ -6,11 +6,12 @@ const isMobile = checkIfMobile()
 
 const useBlobBackground = (canvasRef: React.RefObject<HTMLCanvasElement>) => {
 
-  // Do not use THREE.js functionality, if user happens to be using a mobile device
-  // Causes preformance issues
-  if (isMobile) return
+
 
   useEffect(() => {
+    // Do not use THREE.js functionality, if user happens to be using a mobile device
+    // Causes preformance issues
+    if (isMobile) return
     // Creating blobs in accordance to screen size
     createFirstBlob(window.innerWidth / 6, window.innerHeight / 5)
     if (window.innerWidth < 800) {
